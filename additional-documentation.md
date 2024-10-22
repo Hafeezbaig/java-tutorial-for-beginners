@@ -12,7 +12,8 @@ Both steps provide an overview of Java, covering the foundational concepts of th
 
 - Can you describe what happens from the moment you compile a Java program to when it is run on a specific operating system?
 
-### **Quiz Questions:**
+### **New Quiz Questions:**
+
 1. **What is bytecode?**
    - A) Machine code for Windows
    - B) Code that runs directly on a CPU
@@ -105,7 +106,7 @@ Earth has a diameter of 12742 kilometers.
 Mars has a diameter of 6779 kilometers.
 ```
 
-### **Quiz Questions:**
+### **New Quiz Questions:**
 
 1. **What is a Java class?**
    - A) A template for creating objects (Answer: A)
@@ -129,88 +130,276 @@ Mars has a diameter of 6779 kilometers.
 
 ### Additional Coding Exercises:
 
+### **Exercise 1: Create a "Device" Class with Multiple Methods and Compile It**
 
-### **Exercise 1: Exploring Java Platform Components**
+#### **Problem:**
+Create a Java class called `Device` that represents different electronic devices. The class should:
 
-**Objective**: Understanding the role of the JVM, JRE, and JDK through a practical scenario.
+- Have attributes for the `deviceName`, `brand`, and `powerStatus` (on/off).
 
-#### Scenario:
-You have written a simple Java program `Greeting.java` that prints "Hello, World!" to the console. You want to share this program with two different friends:
+- Implement methods:
 
-1. **Friend A** only has the JRE installed.
+  - `turnOn()` that prints "Device is turned ON."
 
-2. **Friend B** has the JDK installed.
+  - `turnOff()` that prints "Device is turned OFF."
 
-**Tasks**:
+  - `showDetails()` that prints the device's name and brand.
 
-1. Explain what each friend needs to do to run your program.
+- Create instances of the `Device` class for a few devices like "Smartphone", "Laptop", and "Tablet". Turn these devices on and off, and display their details.
 
-2. For **Friend A**, you should provide the compiled bytecode (`Greeting.class`), explain why this is necessary, and describe how they can run the program with the JRE.
+Once you've created the class, follow these steps:
 
-3. For **Friend B**, explain the steps they need to follow, starting with the source file (`Greeting.java`), and show how they can compile and run the program using the JDK.
+1. Save the file as `Device.java`.
 
-#### Sample Code for `Greeting.java`:
+2. Compile the file using `javac Device.java`.
+
+3. Run the program using `java Device`.
+
+#### **Code:**
 
 ```java
-public class Greeting {
+public class Device {
+    // Attributes of the Device class
+    String deviceName;
+    String brand;
+    boolean powerStatus;
+
+    // Constructor to initialize the device
+    public Device(String deviceName, String brand) {
+        this.deviceName = deviceName;
+        this.brand = brand;
+        this.powerStatus = false; // default is off
+    }
+
+    // Method to turn on the device
+    public void turnOn() {
+        if (!powerStatus) {
+            powerStatus = true;
+            System.out.println(deviceName + " is turned ON.");
+        } else {
+            System.out.println(deviceName + " is already ON.");
+        }
+    }
+
+    // Method to turn off the device
+    public void turnOff() {
+        if (powerStatus) {
+            powerStatus = false;
+            System.out.println(deviceName + " is turned OFF.");
+        } else {
+            System.out.println(deviceName + " is already OFF.");
+        }
+    }
+
+    // Method to show details of the device
+    public void showDetails() {
+        System.out.println("Device Name: " + deviceName + ", Brand: " + brand);
+    }
+
+    // Main method to test the Device class
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        // Creating instances of Device class
+        Device smartphone = new Device("Smartphone", "Samsung");
+        Device laptop = new Device("Laptop", "Dell");
+        Device tablet = new Device("Tablet", "Apple");
+
+        // Turning devices on and showing details
+        smartphone.turnOn();
+        smartphone.showDetails();
+
+        laptop.turnOn();
+        laptop.showDetails();
+
+        tablet.turnOn();
+        tablet.showDetails();
+
+        // Turning devices off
+        smartphone.turnOff();
+        laptop.turnOff();
+        tablet.turnOff();
     }
 }
 ```
 
-#### Expected Outcome:
-- Learners should be able to describe the differences between the JRE and JDK and how each is used in different contexts (running bytecode vs. compiling and running source code).
+#### **Explanation:**
 
-- They should know how to compile a Java program with the JDK using `javac` and run it using `java`, and explain why the JRE alone is sufficient to run pre-compiled bytecode.
+**Attributes (deviceName, brand, powerStatus)**: These are the properties of the Device class that hold information about the device’s name, brand, and whether it’s ON or OFF.
+
+**Constructor**: The constructor (`Device()`) initializes each object with a specific `deviceName` and `brand`, and sets the `powerStatus` to OFF by default.
+
+**Methods**:
+- `turnOn()`: Turns on the device by setting `powerStatus` to `true`.
+
+- `turnOff()`: Turns off the device by setting `powerStatus` to `false`.
+
+- `showDetails()`: Displays the device's name and brand.
+
+**Main method**: This is where objects are created, methods are called, and the program is run.
+
+#### **Steps to Compile and Run:**
+
+1. Save the file as `Device.java`.
+
+2. In the terminal, compile the code:
+
+   ```
+   javac Device.java
+   ```
+
+3. Run the code:
+
+   ```
+   java Device
+   ```
+
+#### **Output:**
+
+```java
+Smartphone is turned ON.
+Device Name: Smartphone, Brand: Samsung
+Laptop is turned ON.
+Device Name: Laptop, Brand: Dell
+Tablet is turned ON.
+Device Name: Tablet, Brand: Apple
+Smartphone is turned OFF.
+Laptop is turned OFF.
+Tablet is turned OFF.
+```
 
 ---
 
-### **Exercise 2: Creating and Compiling a Class with a Method**
+### **Exercise 2: Create a "Game" Class with a Scoring System**
 
-**Objective**: Writing and compiling Java code outside of JShell, understanding the use of the `javac` and `java` commands.
+#### **Problem:**
 
-#### Tasks:
+Write a class called `Game` that models a simple game system. The class should:
 
-1. Write a Java class named `Car` in a file called `Car.java`. The class should have the following features:
+- Have attributes for `gameName`, `maxScore`, and `currentScore`.
 
-    - A method `start()` that prints `"The car has started."`.
+- Include methods to:
 
-    - A method `stop()` that prints `"The car has stopped."`.
+  - `startGame()` to initialize the game.
 
-2. Add a `main` method to the class, where you create an instance of `Car` and call both `start()` and `stop()`.
+  - `playGame()` to increase the current score.
 
-3. Compile your `Car.java` file using the `javac` command.
+  - `endGame()` to print the game details and final score.
 
-4. Run the compiled class using the `java` command.
+- Create instances for games like "Soccer", "Basketball", and "Tennis". Start each game, play to increase the score, and then end the game by displaying the final score.
 
-#### Code for `Car.java`:
+#### Compile and run the program after saving the file.
 
+#### **Code:**
 ```java
-public class Car {
-    void start() {
-        System.out.println("The car has started.");
-    }
-    
-    void stop() {
-        System.out.println("The car has stopped.");
+public class Game {
+    // Attributes for the Game class
+    String gameName;
+    int maxScore;
+    int currentScore;
+
+    // Constructor to initialize the game
+    public Game(String gameName, int maxScore) {
+        this.gameName = gameName;
+        this.maxScore = maxScore;
+        this.currentScore = 0;
     }
 
+    // Method to start the game
+    public void startGame() {
+        System.out.println("Starting the game: " + gameName);
+        currentScore = 0; // Reset the score to 0
+    }
+
+    // Method to play the game and increase score
+    public void playGame() {
+        if (currentScore < maxScore) {
+            currentScore += 10; // Increment score by 10
+            System.out.println("Playing " + gameName + "... Current Score: " + currentScore);
+        } else {
+            System.out.println("Game Over! Maximum score reached.");
+        }
+    }
+
+    // Method to end the game and show the final score
+    public void endGame() {
+        System.out.println("Ending the game: " + gameName + ". Final Score: " + currentScore);
+    }
+
+    // Main method to test the Game class
     public static void main(String[] args) {
-        Car myCar = new Car();
-        myCar.start();
-        myCar.stop();
+        // Creating instances of Game class
+        Game soccer = new Game("Soccer", 50);
+        Game basketball = new Game("Basketball", 60);
+        Game tennis = new Game("Tennis", 40);
+
+        // Starting and playing games
+        soccer.startGame();
+        soccer.playGame();
+        soccer.playGame();
+        soccer.endGame();
+
+        basketball.startGame();
+        basketball.playGame();
+        basketball.playGame();
+        basketball.playGame();
+        basketball.endGame();
+
+        tennis.startGame();
+        tennis.playGame();
+        tennis.playGame();
+        tennis.endGame();
     }
 }
 ```
 
-#### Expected Outcome:
+#### **Explanation:**
 
-- The learners will write a basic Java class with methods and a `main` method to execute it.
+**Attributes (gameName, maxScore, currentScore)**: These hold the information about the name of the game, the maximum score limit, and the current score during the game.
 
-- They will compile the code using `javac` and understand how the `.class` file is generated.
+**Constructor**: Initializes the game with the given `gameName` and `maxScore`, and sets the `currentScore` to 0 when the game starts.
 
-- They will run the compiled bytecode using `java Car`, reinforcing the steps of compiling and running a Java program outside of JShell.
+**Methods**:
+
+- `startGame()`: Starts the game and resets the score to 0.
+
+- `playGame()`: Increases the score by 10 points. If the `maxScore` is reached, it prints a message indicating the game is over.
+
+- `endGame()`: Prints the final score and ends the game.
+
+**Main method**: Creates instances of Game, calls the methods to start, play, and end the game, and displays the final score.
+
+#### **Steps to Compile and Run:**
+
+1. Save the file as `Game.java`.
+
+2. In the terminal, compile the code:
+
+   ```
+   javac Game.java
+   ```
+
+3. Run the code:
+
+   ```
+   java Game
+   ```
+
+#### **Output:**
+
+```java
+Starting the game: Soccer
+Playing Soccer... Current Score: 10
+Playing Soccer... Current Score: 20
+Ending the game: Soccer. Final Score: 20
+Starting the game: Basketball
+Playing Basketball... Current Score: 10
+Playing Basketball... Current Score: 20
+Playing Basketball... Current Score: 30
+Ending the game: Basketball. Final Score: 30
+Starting the game: Tennis
+Playing Tennis... Current Score: 10
+Playing Tennis... Current Score: 20
+Ending the game: Tennis. Final Score: 20
+```
 
 ---
 
@@ -289,7 +478,19 @@ Create a class called `Item` that represents an item in an online shopping syste
 Item: Phone, Price: 299.99, Quantity: 2, Total Cost: 599.98
 ```
 
-### **Quiz Questions:**
+### **Existing Quiz Questions:**
+
+1. **What is a class in Object Oriented Programming?**
+   - A) An instance of an object
+   - B) template for creating objects (Answer: B)
+   - C) function to perform actions
+
+2. **What are the two main components of an object in Object Oriented Programming?**
+    - A) State and Behavior (Answer: A)
+    - B) Template and Instance
+    - C) Functions and Variables
+
+### **New Quiz Questions:**
 
 1. **What is the key concept behind Object-Oriented Programming (OOP)?**
    - A) Procedural coding
@@ -439,7 +640,18 @@ Effective Java by Joshua Bloch has 500 copies.
 Clean Code by Robert Martin has 300 copies.
 ```
 
-### **Quiz Questions:**
+### **Existing Quiz Questions:**
+
+1. **Which of the following methods in a class is the recommended approach to set the title attribute?**
+    - A) setTitle(String title) (Answer: A)
+    - B) getTitle()
+    - C) setBook(String book)
+
+2. **In a Java class, what is the purpose of a getter method?**
+    - A) To modify the value of a private member variable
+    - B) To access the value of a private member variable (Answer: B)
+
+### **New Quiz Questions:**
 
 1. **What does the `setSpeed()` method in the MotorBike class do?**
    - A) Sets the speed of the bike (Answer: A)
@@ -519,7 +731,18 @@ Modify the `MotorBike` class to use **encapsulation**. Make the `speed` variable
 Ducati speed: 100
 ```
 
-### **Quiz Questions:**
+### **Existing Quiz Questions:**
+
+1. **What is the purpose of private keyword in Java?**
+    - A) To make a variable or method accessible only within the class (Answer: A)
+    - B) To make a variable or method accessible outside the class
+    - C) To make a variable or method static
+
+2. **What is the main principle that is violated when an object directly accesses the state of another object without using any methods?**
+    - A) Inheritance
+    - B) Encapsulation (Answer: B)
+
+### **New Quiz Questions:**
 
 1. **What is encapsulation in Java?**
    - A) Hiding implementation details (Answer: A)
@@ -663,7 +886,14 @@ Extend the `Book` class to add a new private property `numberOfPages`.
 Number of pages: 100
 ```
 
-### **Quiz Questions:**
+### **Existing Quiz Questions:**
+
+1. **What are the default values for object member variables when they are not explicitly initialized?**
+    - A) null for reference types, true for boolean and the type's minimum value for numeric primitive types
+    - B) null for reference types, false for boolean, and 0 for numeric primitive types (Answer: B)
+    - C) The type's maximum value for primitive types, true for boolean and null for reference types
+
+### **New Quiz Questions:**
 
 1. **What is the main advantage of using encapsulation?**
    - A) Faster code execution
@@ -809,7 +1039,18 @@ Alice is 25 years old.
 Bob is 30 years old.
 ```
 
-### **Quiz Questions:**
+### **Existing Quiz Questions:**
+
+1. **What is a constructor in Java?**
+    - A) A special method that is called when an object of a class is created. (Answer: A)
+    - B) A method that is used to destroy an object.
+
+2. **How is a constructor invoked in Java?**
+    - A) By calling the method directly
+    - B) By using the new keyword to create an object of the class (Answer: B)
+    - C) By declaring the constructor as static
+
+### **New Quiz Questions:**
 
 1. **What is the purpose of a constructor in Java?**
    - A) It defines an abstract method
@@ -833,7 +1074,7 @@ Bob is 30 years old.
 
 **Why Grouped:** This step wraps up the entire OOP section, summarizing the key concepts learned.
 
-### **Quiz Questions:**
+### **New Quiz Questions:**
 
 1. **Which of the following is NOT one of the four pillars of OOP?**
    - A) Encapsulation
@@ -853,253 +1094,497 @@ Bob is 30 years old.
 
 ### Additional Coding Exercises:
 
-### **Exercise 1: Designing a Simple Banking System Using OOP**
+### **Exercise 1: Create a "`GuessTheNumber`" Game**
 
-**Objective**: Practice designing a system with classes, encapsulation, and constructors.
+#### **Problem:**
 
-#### Tasks:
+Create a class called `GuessTheNumber` that allows a player to guess a randomly generated number within a certain range. The class should:
 
-1. **Create a class `BankAccount`** that models a simple bank account with the following attributes:
+- Have private attributes for the target number, the number of attempts, and a range (minimum and maximum numbers).
 
-   - `accountNumber`: The account number of the bank account (private).
+- Implement methods:
 
-   - `balance`: The current balance in the account (private).
+  - `startGame()` – to start the game and generate a random target number within the range.
 
-2. **Add methods** to the `BankAccount` class:
+  - `guess(int number)` – to accept a guess and provide feedback (too high, too low, or correct).
 
-   - `deposit(double amount)`: A method to add money to the balance.
+  - `displayResult()` – to display the total number of attempts made by the player.
 
-   - `withdraw(double amount)`: A method to withdraw money from the balance. Ensure that the balance does not go below zero.
+The game ends when the player guesses the correct number.
 
-   - `getBalance()`: A method to retrieve the current balance.
-   
-3. **Add a constructor** to the `BankAccount` class that accepts an account number and an initial balance.
-
-4. **Create a class `BankAccountRunner`** with the `main()` method where you:
-
-   - Create two instances of `BankAccount` with different account numbers and initial balances.
-
-   - Perform deposit and withdrawal operations and print the balance after each operation.
-
-#### Code:
-
-**BankAccount.java**:
+#### **Code:**
 
 ```java
-public class BankAccount {
-    private String accountNumber;
-    private double balance;
+import java.util.Random;
+import java.util.Scanner;
 
-    public BankAccount(String accountNumber, double balance) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
+public class GuessTheNumber {
+    // Private attributes of the GuessTheNumber class
+    private int targetNumber;     // The random number to be guessed
+    private int numberOfAttempts; // Number of attempts made by the player
+    private int minRange;         // Minimum value of the range
+    private int maxRange;         // Maximum value of the range
+
+    // Constructor to initialize the game with a range
+    public GuessTheNumber(int minRange, int maxRange) {
+        this.minRange = minRange;
+        this.maxRange = maxRange;
+        this.numberOfAttempts = 0; // Initialize attempts to 0
     }
 
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-        }
+    // Method to start the game and generate a random number within the range
+    public void startGame() {
+        Random random = new Random();
+        targetNumber = random.nextInt(maxRange - minRange + 1) + minRange;
+        System.out.println("Game started! Try to guess the number between " + minRange + " and " + maxRange);
     }
 
-    public void withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
+    // Method to accept a guess and provide feedback
+    public void guess(int number) {
+        numberOfAttempts++; // Increment the number of attempts with each guess
+        if (number == targetNumber) {
+            System.out.println("Congratulations! You guessed the correct number.");
+            displayResult();
+        } else if (number < targetNumber) {
+            System.out.println("Too low! Try again.");
         } else {
-            System.out.println("Insufficient balance or invalid amount.");
+            System.out.println("Too high! Try again.");
         }
     }
 
-    public double getBalance() {
-        return balance;
+    // Method to display the result (number of attempts made)
+    public void displayResult() {
+        System.out.println("You guessed the correct number in " + numberOfAttempts + " attempts.");
     }
-}
-```
 
-**BankAccountRunner.java**:
-
-```java
-public class BankAccountRunner {
+    // Main method to test the GuessTheNumber game
     public static void main(String[] args) {
-        BankAccount account1 = new BankAccount("12345", 1000.00);
-        BankAccount account2 = new BankAccount("67890", 500.00);
+        // Create a Scanner to read input from the player
+        Scanner scanner = new Scanner(System.in);
 
-        account1.deposit(500.00);
-        account1.withdraw(200.00);
-        System.out.println("Account 1 Balance: " + account1.getBalance());
+        // Create a GuessTheNumber object with a range between 1 and 10
+        GuessTheNumber game = new GuessTheNumber(1, 10);
 
-        account2.deposit(300.00);
-        account2.withdraw(100.00);
-        System.out.println("Account 2 Balance: " + account2.getBalance());
+        // Start the game
+        game.startGame();
+
+        // Loop until the player guesses the correct number
+        boolean correctGuess = false;
+        while (!correctGuess) {
+            System.out.print("Enter your guess: ");
+            int playerGuess = scanner.nextInt();
+            game.guess(playerGuess); // Call the guess method with the player's input
+
+            if (playerGuess == game.targetNumber) {
+                correctGuess = true; // Break the loop if the guess is correct
+            }
+        }
+
+        // Close the scanner
+        scanner.close();
     }
 }
 ```
 
-#### Output:
+#### **Explanation:**
 
-```java
-Account 1 Balance: 1300.0
-Account 2 Balance: 700.0
+- The `GuessTheNumber` class encapsulates the game logic, including the randomly generated target number, the number of attempts, and the range.
+
+- The constructor initializes the game by setting the range (`minRange`, `maxRange`) and resetting the attempt counter.
+
+- The `startGame()` method generates a random number within the given range.
+
+- The `guess(int number)` method accepts the player's guess, compares it to the target number, and provides feedback (too high, too low, or correct). It also increments the number of attempts.
+
+- The game loop runs until the player guesses the correct number, at which point the game displays the result.
+
+**Attributes (`targetNumber`, `numberOfAttempts`, `minRange`, `maxRange`):** These store the target number to guess, how many guesses the player has made, and the range within which the number is generated.
+
+**Constructor:** Initializes the game's range and resets the attempt counter.
+
+**Methods:**
+
+  - `startGame()`: Randomly generates the target number and starts the game.
+
+  - `guess(int number)`: Takes a guess and gives feedback (too high, too low, or correct).
+
+  - `displayResult()`: Displays the number of attempts made once the player guesses correctly.
+
+**Main method:** Sets up the game, takes input from the player, and loops until the correct guess is made.
+
+#### **Steps to Run:**
+
+1. Save the file as `GuessTheNumber.java`.
+
+2. Compile using:
+
+   ```
+   javac GuessTheNumber.java
+   ```
+
+3. Run the program:
+
+   ```
+   java GuessTheNumber
+   ```
+
+#### **Output:**
+
 ```
-
-**Explanation**:
-
-- Account 1 starts with a balance of 1000, then deposits 500, and withdraws 200, resulting in a balance of 1300.
-
-- Account 2 starts with a balance of 500, then deposits 300, and withdraws 100, resulting in a balance of 700.
-
-#### Expected Outcome:
-
-- Learners will practice using constructors to initialize objects.
-
-- They will reinforce the concept of **encapsulation** by using private variables and methods to interact with object state.
-
-- They will learn how to handle validation in methods, such as ensuring a withdrawal doesn't leave the account with a negative balance.
+Game started! Try to guess the number between 1 and 100
+Enter your guess: 4
+Too high! Try again.
+Enter your guess: 1
+Too low! Try again.
+Enter your guess: 3
+Congratulations! You guessed the correct number.
+You guessed the correct number in 3 attempts.
+```
 
 ---
 
-### **Exercise 2: Object-Oriented Inventory Management System**
-**Objective**: Practice creating multiple classes and using objects to simulate an inventory management system.
+### **Exercise 2: Rock, Paper, Scissors Game**
 
-#### Tasks:
+#### **Problem:**
+Write a class called `RockPaperScissors` that allows the player to compete against the computer in a game of Rock, Paper, Scissors. The game should:
 
-1. **Create a class `Product`** with the following attributes:
+- Randomly generate the computer’s choice (rock, paper, or scissors).
 
-   - `productId`: A unique identifier for the product (private).
+- Accept the player’s choice.
 
-   - `productName`: The name of the product (private).
+- Compare the choices to determine the winner.
 
-   - `quantity`: The quantity of the product available in stock (private).
-   
-2. **Add methods** to the `Product` class:
+- Track the player's **wins**, **losses**, and **ties** over multiple rounds.
 
-   - `increaseStock(int amount)`: A method to increase the stock of a product.
+The game should allow the player to play multiple rounds and display the final score when the player chooses to stop.
 
-   - `decreaseStock(int amount)`: A method to decrease the stock of a product. Ensure that the quantity doesn't fall below zero.
-
-   - `getQuantity()`: A method to get the current quantity of the product.
-
-   - `getProductName()`: A method to get the product name.
-   
-3. **Create a class `Inventory`** to manage multiple `Product` objects. The class should:
-
-   - Contain a list of products.
-
-   - Have methods `addProduct(Product product)` to add a product to the inventory and `removeProduct(String productId)` to remove a product by ID.
-
-4. **Create a class `InventoryManager`** with the `main()` method where:
-
-   - You create a few `Product` objects.
-
-   - You add products to the inventory, increase and decrease stock, and display product details.
-
-#### Code:
-
-**Product.java**:
+#### **Code:**
 
 ```java
-public class Product {
-    private String productId;
-    private String productName;
-    private int quantity;
+import java.util.Random;
+import java.util.Scanner;
 
-    public Product(String productId, String productName, int quantity) {
-        this.productId = productId;
-        this.productName = productName;
-        this.quantity = quantity;
+public class RockPaperScissors {
+    // Attributes to track player's wins, losses, and ties
+    private int wins;
+    private int losses;
+    private int ties;
+
+    // Constructor to initialize the game with 0 wins, losses, and ties
+    public RockPaperScissors() {
+        wins = 0;
+        losses = 0;
+        ties = 0;
     }
 
-    public void increaseStock(int amount) {
-        if (amount > 0) {
-            quantity += amount;
+    // Method to randomly generate the computer's choice
+    public String getComputerChoice() {
+        Random random = new Random();
+        int choice = random.nextInt(3); // Generates a number between 0 and 2
+        switch (choice) {
+            case 0:
+                return "rock";
+            case 1:
+                return "paper";
+            case 2:
+                return "scissors";
+            default:
+                return ""; // This should never happen
         }
     }
 
-    public void decreaseStock(int amount) {
-        if (amount > 0 && amount <= quantity) {
-            quantity -= amount;
+    // Method to determine the winner of a round
+    public void playRound(String playerChoice, String computerChoice) {
+        System.out.println("Computer chose: " + computerChoice);
+
+        if (playerChoice.equals(computerChoice)) {
+            System.out.println("It's a tie!");
+            ties++;
+        } else if (
+            (playerChoice.equals("rock") && computerChoice.equals("scissors")) ||
+            (playerChoice.equals("paper") && computerChoice.equals("rock")) ||
+            (playerChoice.equals("scissors") && computerChoice.equals("paper"))
+        ) {
+            System.out.println("You win!");
+            wins++;
         } else {
-            System.out.println("Insufficient stock or invalid amount.");
+            System.out.println("You lose!");
+            losses++;
         }
     }
 
-    public int getQuantity() {
-        return quantity;
+    // Method to display the player's score
+    public void displayScore() {
+        System.out.println("Wins: " + wins + ", Losses: " + losses + ", Ties: " + ties);
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public Object getProductId() {
-        return null;
-    }
-}
-```
-
-**Inventory.java**:
-
-```java
-import java.util.ArrayList;
-
-public class Inventory {
-    private ArrayList<Product> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
-    public void removeProduct(String productId) {
-        products.removeIf(product -> product.getProductId().equals(productId));
-    }
-
-    public void displayInventory() {
-        for (Product product : products) {
-            System.out.println("Product: " + product.getProductName() + ", Quantity: " + product.getQuantity());
-        }
-    }
-}
-```
-
-**InventoryManager.java**:
-
-```java
-public class InventoryManager {
+    // Main method to run the game
     public static void main(String[] args) {
-        Inventory inventory = new Inventory();
+        Scanner scanner = new Scanner(System.in);
+        RockPaperScissors game = new RockPaperScissors();
 
-        Product laptop = new Product("101", "Laptop", 10);
-        Product smartphone = new Product("102", "Smartphone", 20);
+        boolean keepPlaying = true;
 
-        inventory.addProduct(laptop);
-        inventory.addProduct(smartphone);
+        // Game loop for multiple rounds
+        while (keepPlaying) {
+            System.out.print("Enter your choice (rock, paper, or scissors): ");
+            String playerChoice = scanner.nextLine().toLowerCase(); // Get player's choice and convert to lowercase
 
-        laptop.increaseStock(5);
-        smartphone.decreaseStock(10);
+            // Validate player input
+            if (!playerChoice.equals("rock") && !playerChoice.equals("paper") && !playerChoice.equals("scissors")) {
+                System.out.println("Invalid choice. Please enter rock, paper, or scissors.");
+                continue;
+            }
 
-        inventory.displayInventory();
+            // Get computer's choice and play the round
+            String computerChoice = game.getComputerChoice();
+            game.playRound(playerChoice, computerChoice);
+
+            // Ask if the player wants to play again
+            System.out.print("Do you want to play again? (yes or no): ");
+            String playAgain = scanner.nextLine().toLowerCase();
+
+            if (!playAgain.equals("yes")) {
+                keepPlaying = false; // End the game loop if the player says "no"
+            }
+        }
+
+        // Display the final score after the game ends
+        System.out.println("\nGame Over! Final Score:");
+        game.displayScore();
+
+        // Close the scanner
+        scanner.close();
     }
 }
 ```
 
-Output:
+#### **Explanation:**
+
+- **Attributes:**
+  - `wins`, `losses`, `ties`: These variables track the player's performance over multiple rounds.
+  
+- **Methods:**
+  - `getComputerChoice()`: Generates a random choice for the computer (either "rock", "paper", or "scissors").
+
+  - `playRound()`: Compares the player's choice and the computer's choice, determines the winner, and updates the scores (wins, losses, ties).
+
+  - `displayScore()`: Displays the total number of wins, losses, and ties after the game ends.
+
+- **Main Method:** 
+
+  - The game runs in a loop, allowing the player to play multiple rounds. The loop continues until the player chooses to stop.
+
+  - The player's input is validated to ensure it's either "rock", "paper", or "scissors".
+
+  - After each round, the player is asked if they want to play again.
+
+#### **Steps to Run:**
+
+1. Save the file as `RockPaperScissors.java`.
+
+2. Compile using:
+
+   ```
+   javac RockPaperScissors.java
+   ```
+
+3. Run the program:
+
+   ```
+   java RockPaperScissors
+   ```
+
+#### **Output:**
 
 ```java
-Product: Laptop, Quantity: 15
-Product: Smartphone, Quantity: 10
+Enter your choice (rock, paper, or scissors): rock
+Computer chose: paper
+You lose!
+Do you want to play again? (yes or no): yes
+
+Enter your choice (rock, paper, or scissors): scissors
+Computer chose: paper
+You win!
+Do you want to play again? (yes or no): no
+
+Game Over! Final Score:
+Wins: 1, Losses: 1, Ties: 0
 ```
-
-**Explanation**:
-
-- The Laptop starts with a quantity of 10, and after increasing the stock by 5, its new quantity is 15.
-
-- The Smartphone starts with a quantity of 20, and after decreasing the stock by 10, its new quantity is 10.
-
-#### Expected Outcome:
-
-- Learners will practice object-oriented design by managing relationships between multiple classes (Inventory and Product).
-
-- They will understand the importance of **code encapsulation** by handling inventory operations through methods.
-
-- They will explore concepts like managing collections of objects (`ArrayList`).
 
 ---
+
+### **Exercise 3: Math Quiz Challenge**
+
+#### **Problem:**
+Create a game where the player is presented with random math problems (addition, subtraction, multiplication, or division).
+
+The player must solve as many problems as possible within a time limit (e.g., 10 seconds). The game tracks the player's score based on correct answers.
+
+### **Code:**
+
+```java
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MathQuizChallenge {
+    private static int score = 0; // Keeps track of the player's score
+    private static boolean timeUp = false; // Keeps track of whether the time is up
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("Welcome to the Math Quiz Challenge!");
+        System.out.println("Solve as many math problems as you can within 10 seconds.");
+        System.out.println("Press Enter to start...");
+        scanner.nextLine(); // Wait for the player to press Enter
+
+        // Start the timer for 10 seconds
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeUp = true;
+                System.out.println("\nTime's up!");
+            }
+        }, 10000); // Timer set for 10 seconds
+
+        // Main game loop
+        while (!timeUp) {
+            // Generate random numbers and a random operation
+            int num1 = random.nextInt(10) + 1; // Random number between 1 and 10
+            int num2 = random.nextInt(10) + 1; // Random number between 1 and 10
+            int operator = random.nextInt(4);  // 0 for +, 1 for -, 2 for *, 3 for /
+
+            String operation = "";
+            int correctAnswer = 0;
+
+            switch (operator) {
+                case 0:
+                    operation = "+";
+                    correctAnswer = num1 + num2;
+                    break;
+                case 1:
+                    operation = "-";
+                    correctAnswer = num1 - num2;
+                    break;
+                case 2:
+                    operation = "*";
+                    correctAnswer = num1 * num2;
+                    break;
+                case 3:
+                    operation = "/";
+                    // Ensure that num2 is not zero to avoid division by zero
+                    if (num2 == 0) num2 = 1;
+                    correctAnswer = num1 / num2;
+                    break;
+            }
+
+            // Display the math problem to the player
+            System.out.print(num1 + " " + operation + " " + num2 + " = ");
+
+            // Check if time has run out before accepting input
+            if (scanner.hasNextInt() && !timeUp) {
+                int playerAnswer = scanner.nextInt(); // Get the player's answer
+
+                // Check if the player's answer is correct
+                if (playerAnswer == correctAnswer) {
+                    System.out.println("Correct!");
+                    score++;
+                } else {
+                    System.out.println("Wrong. The correct answer was " + correctAnswer);
+                }
+            } else {
+                break; // Exit the loop if the time is up or no valid input is provided
+            }
+        }
+
+        // Print the final score after the game loop ends
+        System.out.println("\nYour final score is: " + score);
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+```
+
+### **Explanation:**
+
+1. **Attributes:**
+
+   - `score`: This variable tracks the number of correct answers the player gives.
+
+   - `timeUp`: This boolean tracks whether the 30-second timer has ended, signaling that the game is over.
+
+2. **Main Method:**
+
+   - **Timer**: A `Timer` is used to count down 30 seconds. Once the time is up, the game stops, and no more problems are presented to the player.
+
+   - **Random Math Problem Generation**: The game randomly generates two numbers (`num1` and `num2`) and selects a random operation (`+`, `-`, `*`, `/`) for the player to solve. 
+
+   - **Game Loop**: The game keeps running until the timer expires. The player's answers are compared to the correct answers, and their score is updated accordingly.
+
+3. **Game Flow:**
+
+   - The player presses **Enter** to start.
+
+   - Math problems are generated one by one, and the player inputs their answer.
+
+   - The game provides feedback for each answer (correct or wrong).
+
+   - After 30 seconds, the game ends, and the player's final score is displayed.
+
+### **Steps to Run:**
+
+1. Save the file as `MathQuizChallenge.java`.
+
+2. Compile the program:
+
+   ```
+   javac MathQuizChallenge.java
+   ```
+
+3. Run the program:
+
+   ```
+   java MathQuizChallenge
+   ```
+
+### **Output:**
+
+```java
+Welcome to the Math Quiz Challenge!
+Solve as many math problems as you can within 10 seconds.
+Press Enter to start...
+
+3 + 7 = 10
+Correct!
+6 * 5 = 30
+Correct!
+8 / 2 = 4
+Correct!
+4 - 9 = -5
+Correct!
+2 * 2 = 5
+Wrong. The correct answer was 4
+7 + 8 = 15
+Correct!
+
+Time's up!
+Your final score is: 5
+```
+
+### **Possible Enhancements:**
+
+1. **Different Levels:** Adding difficulty levels (easy, medium, hard) where the range of numbers or types of operations becomes more challenging.
+
+2. **Scoring System:** Award more points for solving harder problems (e.g., multiplication and division).
+
+3. **High Score Tracker:** Storing the player's highest score and display it at the end of each game.
+
+---
+
+> End of this document - Last updated 05:58 10/22
